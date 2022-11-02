@@ -1,14 +1,27 @@
 import './App.css';
 import Navbar from "./Components/Navbar";
 import TextForm from "./Components/TextForm";
-// import About from "./Components/About";
+import About from "./Components/About";
 import Alert from "./Components/Alert"
 import React ,{useState} from "react";
 
 
 function App() {
     const[mode,setMode]= useState('light');
-    const toogleTheme = ()=>{
+    const removeBodyClass=()=>{
+        document.body.classList.remove('bg-light');
+        document.body.classList.remove('bg-dark');
+        document.body.classList.remove('bg-success');
+        document.body.classList.remove('bg-warning');
+        document.body.classList.remove('bg-danger');
+        document.body.classList.remove('bg-primary');
+
+    }
+    const toogleTheme = (cls)=>{
+        console.log(cls);
+        removeBodyClass();
+        document.body.classList.add('bg-'+cls);
+
         if(mode==='dark'){
             setMode('light')
             document.body.style.backgroundColor = 'white'
@@ -33,7 +46,8 @@ function App() {
             <Alert alert={alert}/>
             <div className={`container my-3 `}>
                 <TextForm heading='Enter the Text to analyze ' showAlert={showAlert} mode={mode} toogleMode = {toogleTheme}/>
-                {/*<About />*/}
+
+                <About mode={mode}/>
             </div>
         </>
     );
